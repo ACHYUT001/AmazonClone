@@ -1,7 +1,8 @@
 .checkout__product {
   display: flex;
   align-items: center;
-  margin: 20 20px;
+  margin-bottom: 20px;
+  margin-top: 20px;
 }
 
 .checkout__productImg {

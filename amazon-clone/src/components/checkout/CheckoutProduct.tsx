@@ -1,29 +1,38 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import * as CurrencyFormat from "react-currency-format";
 import { useStateValue } from "../../Stateprovider";
 
 import "./CheckoutProduct.css";
+import FlipMove from "react-flip-move";
 
-const CheckoutProduct = ({ id, title, img_source, rating, price }) => {
+interface IProps {
+  id: string;
+  title: string;
+  img_source: string;
+  rating: number;
+  price: number;
+}
+
+const CheckoutProduct: React.FC<IProps> = (IProps) => {
   const [{ basket }, dispatch] = useStateValue();
   const handleRemoveFromBasket = () => {
     dispatch({
       type: "REMOVE-FROM-BASKET",
-      id: id,
+      id: IProps.id,
     });
   };
   return (
     <div className="checkout__product">
       <div>
-        <img className="checkout__productImg" src={img_source} alt="" />
+        <img className="checkout__productImg" src={IProps.img_source} alt="" />
       </div>
       <div className="checkout__productInfo">
-        <p className="checkout__productTitle">{title}</p>
+        <p className="checkout__productTitle">{IProps.title}</p>
         <span>
           <CurrencyFormat
             renderText={(value) => <strong>{value}</strong>}
             decimalScale={2}
-            value={price}
+            value={IProps.price}
             displayType={"text"}
             thousandSeparator={true}
             thousandSpacing="2s"
@@ -31,8 +40,8 @@ const CheckoutProduct = ({ id, title, img_source, rating, price }) => {
           />
         </span>
         <div className="checkout__productRating">
-          {Array(rating)
-            .fill(rating)
+          {Array(IProps.rating)
+            .fill(IProps.rating)
             .map((i) => (
               <small>⭐</small>
             ))}
